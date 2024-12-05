@@ -9,27 +9,26 @@ public class ApiUrls {
 public class OrderService : IOrderService
 {
     private ApiUrls apiUrls {get; set;}
+    private HttpClient httpClient {get; set;}
 
-    public OrderService(ApiUrls _apiUrls)
+    public OrderService(ApiUrls _apiUrls, HttpClient _httpClient)
     {
         apiUrls = _apiUrls;
+        httpClient = _httpClient;
     }
 
     public async Task<HttpResponseMessage> GetOrdersAsync()
     {
-        using HttpClient httpClient = new();
         return await httpClient.GetAsync(apiUrls.OrdersApiUrl);
     }
 
     public async Task<HttpResponseMessage>  UpdateOrder(StringContent content)
     {
-        using HttpClient httpClient = new();
         return await httpClient.PostAsync(apiUrls.UpdateApiUrl, content);
     }
 
        public async Task<HttpResponseMessage> SendAlert(StringContent content)
     {
-        using HttpClient httpClient = new();
         return await httpClient.PostAsync(apiUrls.AlertApiUrl, content);
     }
 }

@@ -54,7 +54,8 @@ namespace Synapse.OrdersExample
                 OrdersApiUrl = "https://orders-api.com/orders",
                 AlertApiUrl = "https://alert-api.com/alerts"
             };
-            var orderService = new OrderService(apiUrls);
+            var httpClient = new HttpClient();
+            var orderService = new OrderService(apiUrls, httpClient);
 
             return new OrderProcessingService(logger, orderService);
         }
